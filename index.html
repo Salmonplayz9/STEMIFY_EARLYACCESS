@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stemify High — Master Science &amp; Math, the Futuristic Way</title>
+
+  <!-- Fonts: Orbitron (display) + Space Grotesk (body) + JetBrains Mono (code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="css/style.css?v=2" />
+</head>
+<body>
+
+  <!-- ============================================================
+       FLOATING GEOMETRIC BACKGROUND (futuristic ambient shapes)
+       ============================================================ -->
+  <div class="floats" aria-hidden="true">
+    <div class="float-shape float-tri" style="top:12%; left:8%;  width:22px; height:38px;  animation:floatA 11s ease-in-out infinite;"></div>
+    <div class="float-shape float-ring violet" style="top:22%; left:84%; width:64px; height:64px; animation:floatB 9s ease-in-out infinite;"></div>
+    <div class="float-shape float-hex" style="top:58%; left:6%;  width:34px; height:34px;  animation:floatA 13s ease-in-out infinite;"></div>
+    <div class="float-shape float-tri violet" style="top:74%; left:88%; width:18px; height:30px; animation:floatB 10s ease-in-out infinite;"></div>
+    <div class="float-shape float-ring" style="top:82%; left:12%; width:44px; height:44px;  animation:floatA 12s ease-in-out infinite;"></div>
+    <div class="float-shape float-sq" style="top:38%; left:92%; width:26px; height:26px;    animation:floatB 8s ease-in-out infinite;"></div>
+    <div class="float-shape float-tri pink" style="top:8%;  left:52%; width:16px; height:26px; animation:floatA 14s ease-in-out infinite;"></div>
+  </div>
+
+  <!-- ============================================================
+       NAVBAR — logo, MATH / SCIENCE sections, DP placeholder
+       ============================================================ -->
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">◈</span>
+      STEMIFY<span class="grad-text">HIGH</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="math.html" class="nav-link">Math</a>
+      <a href="#" class="nav-link" data-science>Science</a>
+    </nav>
+
+    <!-- Global DP placeholder (fixed top-right) + profile popover -->
+    <div class="dp-wrap">
+      <div class="dp" id="dpBtn" title="Your profile">S</div>
+      <div class="popover" id="dpPopover">
+        <div class="p-name">Guest Explorer</div>
+        <div class="p-sub">Not signed in yet</div>
+        <span class="tier-chip standard">◈ Standard</span>
+        <div class="p-stat"><span>Progress</span><b>0%</b></div>
+        <div class="p-stat"><span>Streak</span><b>0 days</b></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero">
+    <span class="hero-badge">✦ Next-Gen Learning Platform</span>
+    <h1>Master <span class="grad-text">Science &amp; Math</span><br />the Futuristic Way</h1>
+    <p class="lead">
+      AI-powered chatbots, auto-generated sample papers, weekly MCQ battles and
+      an interactive math solver — all wrapped in a sleek, glowing interface
+      built for high-school achievers.
+    </p>
+
+    <div class="hero-cta">
+      <a href="math.html" class="btn btn-primary">⚡ Enter Math Hub</a>
+      <button class="btn" data-science>🧪 Enter Science Hub</button>
+    </div>
+
+    <div class="hero-stats">
+      <div><div class="num">1,200+</div><div class="lbl">Curated Articles</div></div>
+      <div><div class="num">4</div><div class="lbl">Board Classes</div></div>
+      <div><div class="num">24/7</div><div class="lbl">AI Doubt Support</div></div>
+      <div><div class="num">₹0</div><div class="lbl">To Start</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURES GRID
+       ============================================================ -->
+  <section class="block">
+    <div class="sec-head reveal">
+      <span class="sec-kicker">Core Features</span>
+      <h2>Everything You Need to <span class="grad-text">Level Up</span></h2>
+      <p>Powerful study tools that feel like the future — but are built for today's classroom.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card reveal">
+        <div class="ic">🤖</div>
+        <h3>AI Chatbot</h3>
+        <p>Stuck on a concept? Ask the "Have a Question?" assistant inside any article and get instant step-by-step help.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic">📄</div>
+        <h3>Sample Papers</h3>
+        <p>One-click question papers generated for your class, aligned to board patterns — instantly, anytime.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic">🧮</div>
+        <h3>Math Solver</h3>
+        <p>Type any problem and watch it render in beautiful KaTeX — or drop an image of a handwritten sum.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic">📈</div>
+        <h3>Weekly MCQ Tests</h3>
+        <p>Timed auto-generated quizzes that train exam speed and reward consistent practice.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic">🔥</div>
+        <h3>Streaks &amp; Badges</h3>
+        <p>Gamified motivation — flame streaks, achievement badges and a live leaderboard.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic">👨‍🏫</div>
+        <h3>Online Tutors</h3>
+        <p>Need a human? Request a live tutor session from the dashboard with one click.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRICING
+       ============================================================ -->
+  <section class="block">
+    <div class="sec-head reveal">
+      <span class="sec-kicker">Pricing</span>
+      <h2>Start Free. <span class="grad-text">Unlock Everything</span> Later.</h2>
+      <p>No hidden charges. Cancel the premium plan anytime.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Standard card -->
+      <div class="price-card reveal">
+        <div class="tier" style="color:var(--green)">Standard</div>
+        <div class="price" style="color:var(--green)">₹0</div>
+        <div class="per">forever · free</div>
+        <ul>
+          <li>Full article library</li>
+          <li>3 AI chatbot queries / month</li>
+          <li>Sample papers (view-only)</li>
+          <li>Voice search</li>
+          <li class="no">Unlimited AI chat</li>
+          <li class="no">Downloads &amp; offline mode</li>
+          <li class="no">Weekly MCQ tests &amp; gamification</li>
+          <li class="no">Math solver &amp; NCERT hub</li>
+        </ul>
+        <a href="math.html" class="btn btn-ghost" style="width:100%">Start Learning Free</a>
+      </div>
+
+      <!-- Premium card -->
+      <div class="price-card pop reveal">
+        <span class="ribbon">Most Popular</span>
+        <div class="tier grad-text">Premium</div>
+        <div class="price grad-text">₹299<span style="font-size:14px; color:var(--muted)">/month</span></div>
+        <div class="per">everything in Standard, plus:</div>
+        <ul>
+          <li>Unlimited AI chatbot queries</li>
+          <li>Download papers, lessons &amp; practice sets</li>
+          <li>Weekly auto-generated MCQ tests</li>
+          <li>AI study plans &amp; progress tracker</li>
+          <li>Badges, streaks &amp; leaderboard</li>
+          <li>CBSE / NCERT solved hub</li>
+          <li>KaTeX math solver + image solver</li>
+          <li>Interactive graph visualizations</li>
+          <li>Priority online tutor requests</li>
+        </ul>
+        <a href="math.html" class="btn btn-pink" style="width:100%">Upgrade to Premium</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HOW IT WORKS
+       ============================================================ -->
+  <section class="block">
+    <div class="sec-head reveal">
+      <span class="sec-kicker">How It Works</span>
+      <h2>Up and Running in <span class="grad-text">60 Seconds</span></h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card reveal">
+        <div class="ic">🔑</div>
+        <h3>1 · Sign In</h3>
+        <p>One-tap Google login or skip straight into the Math Hub as a guest.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic">🎯</div>
+        <h3>2 · Set Your Class</h3>
+        <p>A quick 15-second survey personalises articles, papers and study plans to your level.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic">🚀</div>
+        <h3>3 · Start Crushing</h3>
+        <p>Read, ask, solve, test and climb the leaderboard — all in one glowing dashboard.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER — Fiverr, Instagram, Facebook + Email contact
+       ============================================================ -->
+  <footer class="site-foot">
+    <div class="foot-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">◈</span>
+        STEMIFY<span class="grad-text">HIGH</span>
+      </a>
+
+      <div class="foot-links">
+        <a class="soc-link" href="https://www.fiverr.com" target="_blank" rel="noopener noreferrer">⚒ Fiverr</a>
+        <a class="soc-link" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+        <a class="soc-link" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">👍 Facebook</a>
+        <a class="soc-link mail" href="mailto:hello@stemifyhigh.com?subject=Stemify%20High%20Contact">✉ Email Us</a>
+      </div>
+    </div>
+    <div class="foot-note">STEMIFY HIGH © 2026 · Built for curious minds ✦</div>
+  </footer>
+
+  <!-- Toast notifications live here -->
+  <div id="toasts" aria-live="polite"></div>
+
+  <!-- Landing page logic -->
+  <script src="js/landing.js?v=2"></script>
+</body>
+</html>

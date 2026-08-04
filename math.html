@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Hub — Stemify High</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- KaTeX — beautiful math typesetting for articles + solvers -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css?v=4" />
+</head>
+<body>
+
+  <!-- ================= FLOATING GEOMETRIC BACKGROUND ================= -->
+  <div class="floats" aria-hidden="true">
+    <div class="float-shape float-tri" style="top:14%; left:6%;  animation:floatA 11s ease-in-out infinite;"></div>
+    <div class="float-shape float-ring violet" style="top:26%; left:88%; width:58px; height:58px; animation:floatB 9s ease-in-out infinite;"></div>
+    <div class="float-shape float-hex" style="top:60%; left:4%;  width:30px; height:30px;  animation:floatA 13s ease-in-out infinite;"></div>
+    <div class="float-shape float-sq" style="top:80%; left:90%; width:24px; height:24px;  animation:floatB 10s ease-in-out infinite;"></div>
+    <div class="float-shape float-ring" style="top:70%; left:50%; width:40px; height:40px; animation:floatA 12s ease-in-out infinite;"></div>
+  </div>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">◈</span>
+      STEMIFY<span class="grad-text">HIGH</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="math.html" class="nav-link active">Math</a>
+      <a href="#" class="nav-link" data-science>Science</a>
+    </nav>
+      <div class="dp-wrap">
+      <div class="dp" id="dpBtn" title="Your profile">S</div>
+      <div class="popover" id="dpPopover">
+        <div class="p-name">Guest Explorer</div>
+        <div class="p-sub">Not signed in yet</div>
+        <span class="tier-chip standard">◈ Standard</span>
+        <div class="p-stat"><span>AI queries left</span><b>3/3</b></div>
+        <button class="btn btn-sm btn-ghost" id="managePlanBtn" style="width:100%; margin-top:12px">⚙ Switch Plan</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN DASHBOARD ================= -->
+  <main class="page-shell">
+
+    <!-- Title -->
+    <h1 class="page-title">Math <span class="grad-text">Hub</span> <span id="tierPill"></span>
+      <button class="btn btn-sm btn-ghost" id="headerPlanBtn" style="margin-left:8px; vertical-align:middle">⇄ Switch Plan</button>
+    </h1>
+    <p class="page-sub">Search, read and conquer — your futuristic math command centre.</p>
+
+    <!-- ============ 1. GLOWING SEARCH BAR + VOICE TYPING ============ -->
+    <div class="search-bar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input type="text" id="globalSearch" placeholder="Search articles, topics, formulas… try “quadratic”" autocomplete="off" />
+      <button class="mic-btn" id="micBtn" title="Voice typing" aria-label="Voice search">
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4M8 21h8"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- ============ 2. SUGGESTED ARTICLES GRID ============ -->
+    <section style="margin-bottom:40px">
+      <div class="sec-head" style="text-align:left; margin-bottom:22px">
+        <span class="sec-kicker">Suggested Reading</span>
+        <h2 style="font-size:22px">Curated <span class="grad-text">Articles</span></h2>
+      </div>
+      <div class="grid grid-4" id="articlesGrid"><!-- injected by JS --></div>
+    </section>
+
+    <!-- ============ 3. SAMPLE PAPERS (view-only for Standard) ============ -->
+    <section style="margin-bottom:40px">
+      <div class="sec-head" style="text-align:left; margin-bottom:22px">
+        <span class="sec-kicker">Exam Prep</span>
+        <h2 style="font-size:22px">Sample <span class="grad-text">Question Papers</span></h2>
+      </div>
+      <div class="card" id="paperCard">
+        <div class="ic">📄</div>
+        <h3>Generate a Sample Question Paper</h3>
+        <p style="margin:8px 0 16px">Pick your class and instantly get a board-pattern paper with MCQ, short-answer and long-answer sections.
+          <span id="paperModeNote" style="color:var(--amber)"></span></p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">
+          <select id="paperClass" aria-label="Select class" style="padding:10px 14px; border-radius:10px; background:rgba(255,255,255,.04); border:1px solid var(--line); color:var(--text); font-family:var(--font-body); outline:none">
+            <option value="9">Class 9</option>
+            <option value="10" selected>Class 10</option>
+            <option value="11">Class 11</option>
+            <option value="12">Class 12</option>
+          </select>
+          <button class="btn btn-primary" id="genPaperBtn">⚡ Generate Paper</button>
+          <button class="btn" id="downloadPaperBtn" disabled title="Premium feature">⬇ Download</button>
+        </div>
+        <div id="paperView" class="solve-out"><!-- generated paper renders here --></div>
+      </div>
+    </section>
+
+    <!-- ============ 4. PREMIUM SUITE (locked for Standard) ============ -->
+    <section>
+      <div class="sec-head" style="text-align:left; margin-bottom:22px">
+        <span class="sec-kicker">Premium Suite</span>
+        <h2 style="font-size:22px">Advanced <span class="grad-text">Tools</span> &amp; Motivation</h2>
+      </div>
+
+      <div class="premium-wrap" id="premiumWrap">
+        <!-- Tabs -->
+        <div class="tabs-row" id="premiumTabs">
+          <button class="tab on" data-tab="tests">Weekly Tests</button>
+          <button class="tab" data-tab="plans">Study Plans</button>
+          <button class="tab" data-tab="games">Gamification</button>
+          <button class="tab" data-tab="ncert">NCERT Hub</button>
+          <button class="tab" data-tab="solver">Math Solver</button>
+          <button class="tab" data-tab="images">Image Solver</button>
+          <button class="tab" data-tab="graphs">Graphs</button>
+          <button class="tab" data-tab="tutor">Tutor</button>
+        </div>
+
+        <!-- ---- TAB: Weekly MCQ Tests ---- -->
+        <div class="tabpane on" id="pane-tests">
+          <div class="feat-card card">
+            <h3>🧪 Weekly MCQ Test <span class="quiz-timer" id="quizTimer" style="margin-left:auto">⏱ 00:60</span></h3>
+            <p class="muted" style="font-size:12px; margin-bottom:16px">8 auto-generated questions · 60 seconds · one shot every week</p>
+            <div id="quizArea"><!-- questions injected --></div>
+            <div id="quizResults" class="solve-out" style="display:none"></div>
+            <button class="btn btn-primary" id="quizStartBtn" style="width:100%">▶ Start Weekly Test</button>
+          </div>
+        </div>
+
+        <!-- ---- TAB: Study Plans ---- -->
+        <div class="tabpane" id="pane-plans">
+          <div class="feat-card card">
+            <h3>🎯 AI-Generated Study Plan <span class="muted" style="font-size:11px">(based on your weak areas)</span></h3>
+            <p class="muted" style="font-size:12px; margin-bottom:16px">Click a goal to mark it complete.</p>
+            <div id="planList"><!-- injected --></div>
+            <button class="btn" id="regeneratePlanBtn" style="margin-top:14px">♻ Regenerate Plan</button>
+          </div>
+        </div>
+
+        <!-- ---- TAB: Gamification ---- -->
+        <div class="tabpane" id="pane-games">
+          <div style="display:flex; gap:18px; flex-wrap:wrap; margin-bottom:26px; align-items:center">
+            <div class="streak-flame">🔥 <span id="streakCount">0</span> day streak</div>
+            <div class="streak-flame" style="border-color:rgba(0,229,255,.5); color:var(--cyan)">🏆 <span id="pointsCount">0</span> pts</div>
+          </div>
+          <h3 style="font-size:14px; margin-bottom:14px">🏅 Badges</h3>
+          <div class="badge-grid" id="badgesGrid"><!-- injected --></div>
+          <h3 style="font-size:14px; margin:28px 0 14px">📊 Leaderboard — This Week</h3>
+          <div id="leaderboard"><!-- injected --></div>
+        </div>
+
+        <!-- ---- TAB: CBSE / NCERT Hub ---- -->
+        <div class="tabpane" id="pane-ncert">
+          <div class="feat-card card">
+            <h3>📖 CBSE / NCERT Hub <span class="muted" style="font-size:11px">— Class 9 solved questions</span></h3>
+            <p class="muted" style="font-size:12px; margin-bottom:18px">Official-pattern solved questions + tips &amp; tricks for every chapter.</p>
+            <div id="ncertList"><!-- injected --></div>
+          </div>
+        </div>
+
+        <!-- ---- TAB: Math Solver (KaTeX output) ---- -->
+        <div class="tabpane" id="pane-solver">
+          <div class="feat-card card">
+            <h3>🧮 Math Solver</h3>
+            <p class="muted" style="font-size:12px; margin-bottom:14px">Type an equation like <b class="font-mono">2x + 3 = 11</b> or <b class="font-mono">x^2 - 5x + 6 = 0</b>. Rendered in KaTeX.</p>
+            <textarea class="solver-input" id="solverInput" placeholder="e.g.  x^2 - 4x + 3 = 0"></textarea>
+            <button class="btn btn-primary" id="solveBtn" style="margin-top:12px">⚡ Solve</button>
+            <div class="solve-out" id="solveOut"></div>
+          </div>
+        </div>
+
+        <!-- ---- TAB: Image Solver (drag & drop) ---- -->
+        <div class="tabpane" id="pane-images">
+          <div class="feat-card card">
+            <h3>📷 Image Solver</h3>
+            <p class="muted" style="font-size:12px; margin-bottom:14px">Drop a photo of a handwritten problem — AI extracts and solves it step by step.</p>
+            <div class="drop-zone" id="dropZone">
+              <div class="dz-ic">🖼</div>
+              <p><b>Drag &amp; drop</b> an image here, or <b>click to browse</b></p>
+              <p style="font-size:11px; margin-top:6px">PNG · JPG · max 5 MB</p>
+              <input type="file" id="fileInput" accept="image/*" hidden />
+            </div>
+            <div id="imgPreview" style="display:none; margin-top:16px; text-align:center">
+              <img id="imgPreviewEl" alt="Uploaded problem" style="max-width:260px; border-radius:12px; border:1px solid var(--line)" />
+            </div>
+            <div class="solve-out" id="imgOut"><!-- AI steps injected --></div>
+          </div>
+        </div>
+
+        <!-- ---- TAB: Graphs (interactive placeholders) ---- -->
+        <div class="tabpane" id="pane-graphs">
+          <div class="grid grid-3">
+            <div class="card graph-card">
+              <h3 style="font-size:13px">y = x² − 2</h3>
+              <canvas id="graphParabola"></canvas>
+              <div class="g-cap">parabola · vertex (0, −2)</div>
+            </div>
+            <div class="card graph-card">
+              <h3 style="font-size:13px">y = sin(x)</h3>
+              <canvas id="graphSine"></canvas>
+              <div class="g-cap">sine wave · period 2π</div>
+            </div>
+            <div class="card graph-card">
+              <h3 style="font-size:13px">y ≤ x + 1 (shaded)</h3>
+              <canvas id="graphIneq"></canvas>
+              <div class="g-cap">linear inequality region</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---- TAB: Tutor ---- -->
+        <div class="tabpane" id="pane-tutor">
+          <div class="tutor-cta">
+            <h3>👨‍🏫 Request an <span class="grad-text">Online Tutor</span></h3>
+            <p>Live 1-on-1 help for exam prep, homework or concepts — matched to your class and syllabus.</p>
+            <button class="btn btn-pink" id="tutorBtn">📡 Request Online Tutor</button>
+          </div>
+        </div>
+
+        <!-- Lock overlay shown to Standard users -->
+        <div class="lock-overlay" id="premiumLock">
+          <div>
+            <div class="lock-icon">🔒</div>
+            <h4>Premium Suite Locked</h4>
+            <p>Unlock weekly tests, study plans, solvers, NCERT hub and more with Premium — ₹299/month.</p>
+            <button class="btn btn-pink" id="upgradeBtn">⬆ Upgrade to Premium</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-foot">
+    <div class="foot-inner">
+      <a href="index.html" class="logo"><span class="logo-mark">◈</span> STEMIFY<span class="grad-text">HIGH</span></a>
+      <div class="foot-links">
+        <a class="soc-link" href="https://www.fiverr.com" target="_blank" rel="noopener noreferrer">⚒ Fiverr</a>
+        <a class="soc-link" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+        <a class="soc-link" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">👍 Facebook</a>
+        <a class="soc-link mail" href="mailto:hello@stemifyhigh.com?subject=Stemify%20High%20Contact">✉ Email Us</a>
+      </div>
+    </div>
+    <div class="foot-note">STEMIFY HIGH © 2026 · Built for curious minds ✦</div>
+  </footer>
+
+  <!-- ================= ONBOARDING MODAL 1 · AUTH ================= -->
+  <div class="modal-backdrop" id="authModal">
+    <div class="modal">
+      <button class="modal-x" data-close="authModal" title="Close">✕</button>
+      <h3>Welcome to the <span class="grad-text">Math Hub</span></h3>
+      <p class="m-sub">Sign in to sync your progress, or explore as a guest.</p>
+      <button class="g-btn" id="googleBtn">
+        <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A11 11 0 0 0 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        Continue with Google
+      </button>
+      <div style="margin:16px 0; text-align:center; color:var(--muted); font-size:11px; letter-spacing:.2em">— or —</div>
+      <button class="btn btn-ghost" style="width:100%" id="skipAuthBtn">Skip for Now →</button>
+    </div>
+  </div>
+
+  <!-- ================= ONBOARDING MODAL 2 · PRICING ================= -->
+  <div class="modal-backdrop" id="pricingModal">
+    <div class="modal">
+      <button class="modal-x" data-close="pricingModal" title="Close">✕</button>
+      <h3>Choose your <span class="grad-text">Power Level</span></h3>
+      <p class="m-sub">First-time setup — pick a plan (you can upgrade anytime).</p>
+
+      <div class="billing-toggle">
+        <button class="on" id="planStdBtn">Standard · Free</button>
+        <button id="planPremBtn">Premium · ₹299/mo</button>
+      </div>
+
+      <!-- Plan summary card -->
+      <div class="card" id="planSummary" style="padding:18px; margin-bottom:18px">
+        <div id="planStdSummary">
+          <h3 style="font-size:13px; margin-bottom:6px">⚡ Standard</h3>
+          <ul style="list-style:none; font-size:12px; color:var(--muted); line-height:2">
+            <li>✓ Full article library</li>
+            <li>✓ 3 AI queries per month</li>
+            <li>✓ Sample papers — view only</li>
+          </ul>
+        </div>
+        <div id="planPremSummary" style="display:none">
+          <h3 style="font-size:13px; margin-bottom:6px; color:var(--amber)">👑 Premium — ₹299 / month</h3>
+          <ul style="list-style:none; font-size:12px; color:var(--muted); line-height:2">
+            <li>✓ Unlimited AI chatbot</li>
+            <li>✓ Downloads &amp; offline mode</li>
+            <li>✓ Weekly tests, plans, gamification</li>
+            <li>✓ Math + Image solvers, NCERT hub, tutors</li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="confirmPlanBtn" style="width:100%">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ================= ONBOARDING MODAL 3 · SURVEY ================= -->
+  <div class="modal-backdrop" id="surveyModal">
+    <div class="modal">
+      <button class="modal-x" data-close="surveyModal" title="Close">✕</button>
+      <h3>Personalise your <span class="grad-text">Journey</span></h3>
+      <p class="m-sub">Tell us a little about yourself — we'll tailor papers, plans &amp; articles to your level.</p>
+
+      <div class="field">
+        <label for="srvClass">Class</label>
+        <select id="srvClass">
+          <option value="9">Class 9</option>
+          <option value="10" selected>Class 10</option>
+          <option value="11">Class 11</option>
+          <option value="12">Class 12</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="srvCountry">Country</label>
+          <select id="srvCountry">
+            <option>India</option><option>United States</option><option>United Kingdom</option>
+            <option>Canada</option><option>Australia</option><option>UAE</option><option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="srvAge">Age</label>
+          <input id="srvAge" type="number" min="10" max="20" placeholder="e.g. 15" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="srvSchool">School Type</label>
+        <select id="srvSchool">
+          <option>CBSE</option><option>ICSE</option><option>State Board</option>
+          <option>International (IB/IGCSE)</option><option>Other</option>
+        </select>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:6px">
+        <button class="btn btn-ghost" id="skipSurveyBtn" style="flex:1">Skip →</button>
+        <button class="btn btn-primary" id="saveSurveyBtn" style="flex:2">🚀 Enter Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MOCK PAYMENT MODAL (Razorpay-style) ================= -->
+  <div class="modal-backdrop" id="payModal">
+    <div class="modal" style="max-width:420px; text-align:center">
+      <button class="modal-x" data-close="payModal">✕</button>
+      <h3 style="margin-bottom:14px">Secure <span class="grad-text">Payment</span></h3>
+      <div class="card" style="padding:16px; margin-bottom:16px; text-align:left">
+        <div style="display:flex; justify-content:space-between; font-size:13px"><span class="muted">Stemify Premium · Monthly</span><b>₹299</b></div>
+        <div style="display:flex; justify-content:space-between; font-size:13px; margin-top:6px"><span class="muted">GST (18%)</span><b>₹53.82</b></div>
+        <div style="display:flex; justify-content:space-between; font-size:13px; margin-top:6px; border-top:1px dashed var(--line); padding-top:8px"><span class="muted">Total</span><b class="grad-text" style="font-size:15px">₹352.82</b></div>
+      </div>
+      <div id="payActions">
+        <button class="btn btn-primary" id="payRazorpayBtn" style="width:100%">⚡ Pay with Razorpay (mock)</button>
+        <button class="btn btn-ghost" id="payPaypalBtn" style="width:100%; margin-top:10px">Pay with PayPal (mock)</button>
+      </div>
+      <div id="payProcessing" style="display:none; padding:20px">
+        <span class="spinner"></span>
+        <p class="muted" style="margin-top:12px; font-size:13px">Contacting payment gateway…</p>
+      </div>
+      <div id="paySuccess" style="display:none; padding:14px">
+        <div style="font-size:42px; margin-bottom:8px">🎉</div>
+        <h3 style="color:var(--green); margin-bottom:6px">Payment Successful!</h3>
+        <p class="muted" style="font-size:13px">Premium unlocked — welcome to the full suite.</p>
+        <button class="btn btn-primary" id="payDoneBtn" style="width:100%; margin-top:14px">Enter Dashboard →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= DOWNGRADE CONFIRM MODAL ================= -->
+  <div class="modal-backdrop" id="downgradeModal">
+    <div class="modal" style="text-align:center">
+      <button class="modal-x" data-close="downgradeModal">✕</button>
+      <h3>Switch to <span class="grad-text">Standard</span>?</h3>
+      <p class="m-sub">Downgrading will lock the Premium features at the end of the billing cycle:
+        unlimited AI chat, downloads, weekly tests, study plans, solvers and the NCERT hub.</p>
+      <div class="card" style="padding:14px; margin-bottom:18px; text-align:left; font-size:12px; color:var(--muted); line-height:1.9">
+        <b style="color:var(--green)">You keep:</b> all articles · 3 AI queries/month · sample papers (view-only)
+      </div>
+      <div style="display:flex; gap:10px">
+        <button class="btn btn-ghost" id="downgradeCancelBtn" style="flex:1">Keep Premium</button>
+        <button class="btn btn-pink" id="downgradeConfirmBtn" style="flex:1">Switch to Standard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ARTICLE READER (Wikipedia-style) ================= -->
+  <div class="modal-backdrop reader-modal" id="readerModal">
+    <div class="modal">
+      <button class="modal-x" data-close="readerModal">✕</button>
+      <div id="readerBody" class="reader-body"><!-- article HTML injected --></div>
+      <div style="border-top:1px solid var(--line); padding-top:14px; display:flex; justify-content:space-between; align-items:center; gap:10px">
+        <button class="btn btn-pink btn-sm" id="askQuestionBtn">❓ Have a Question?</button>
+        <span class="muted" style="font-size:11px">Powered by AI assistant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TUTOR REQUEST MODAL ================= -->
+  <div class="modal-backdrop" id="tutorModal">
+    <div class="modal">
+      <button class="modal-x" data-close="tutorModal">✕</button>
+      <h3>Request an <span class="grad-text">Online Tutor</span></h3>
+      <p class="m-sub">We'll match you with a live tutor for your class &amp; syllabus.</p>
+      <div class="field">
+        <label for="tutSubject">Subject / Topic</label>
+        <input id="tutSubject" placeholder="e.g. Quadratic Equations" />
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="tutDate">Preferred Date</label>
+          <input id="tutDate" type="date" />
+        </div>
+        <div class="field">
+          <label for="tutTime">Time Slot</label>
+          <select id="tutTime">
+            <option>4:00 PM — 5:00 PM</option><option>5:00 PM — 6:00 PM</option>
+            <option>6:00 PM — 7:00 PM</option><option>7:00 PM — 8:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-pink" id="tutorSendBtn" style="width:100%">📡 Request Session</button>
+    </div>
+  </div>
+
+  <!-- ================= CHATBOT (slide-out panel) ================= -->
+  <div class="chatbot-shell" id="chatShell">
+    <div class="chat-head">
+      <div class="chat-avatar">🤖</div>
+      <div>
+        <div style="font-family:var(--font-head); font-size:13px; letter-spacing:.1em">STEMIFY AI</div>
+        <div style="font-size:11px; color:var(--muted)" id="chatStatus">online · ready</div>
+      </div>
+      <button class="modal-x" style="position:static; margin-left:auto" id="chatCloseBtn">✕</button>
+    </div>
+    <div class="chat-msg-area" id="chatMsgs"><!-- bubbles injected --></div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" placeholder="Ask anything about this topic…" />
+      <button class="send-btn" id="chatSendBtn" aria-label="Send">
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating "Have a Question?" button -->
+  <button class="fab-question" id="fabQuestion">❓ Have a Question?</button>
+
+  <!-- Toast host -->
+  <div id="toasts" aria-live="polite"></div>
+
+  <!-- Logic: shared data → dashboard logic -->
+  <script src="js/data.js?v=4"></script>
+  <script src="js/math.js?v=4"></script>
+</body>
+</html>
